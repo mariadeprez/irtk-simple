@@ -45,7 +45,7 @@ King's College London <br>
 *************************************************************************************
 *************************************************************************************		
 
-ABOUT Image Registration Toolkit (IRTK)
+### ABOUT Image Registration Toolkit (IRTK)
 
 Authors: 
 Daniel Rueckert
