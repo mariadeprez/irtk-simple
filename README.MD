@@ -1,5 +1,5 @@
 
-SLICE TO VOLUME RECONSTRUCTION (SVR)
+# SLICE TO VOLUME RECONSTRUCTION (SVR)
 
 This software package has been created to distribute software for motion correction 
 and super-resolution reconstruction of structural fetal MRI, described in 
@@ -14,7 +14,7 @@ subset of package Image Registration Toolkit (IRTK).
 The package is parallelized using Threading Building Blocks (TBB), which is included
 to ensure compatibility of the version. 
 
-INSTRUCTIONS for UBUNTU:
+## INSTRUCTIONS for UBUNTU:
 
 * Install libraries:
 
