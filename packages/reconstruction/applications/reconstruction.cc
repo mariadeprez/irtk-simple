@@ -100,9 +100,9 @@ int main(int argc, char **argv)
   // Default values.
   int templateNumber=0;
   irtkRealImage *mask=NULL;
-  int iterations = 4;
+  int iterations = 3;
   bool debug = false;
-  double sigma=12;
+  double sigma=15;
   double resolution = 0.75;
   double lambda = 0.02;
   double delta = 150;
@@ -720,7 +720,7 @@ int main(int argc, char **argv)
       if ( ! no_log ) {
           cout.rdbuf (strm_buffer);
       }
-    cout<<"Iteration "<<iter<<". "<<endl;
+    cout<<"Iteration "<<iter<<" out of "<<iterations<<": "<<endl;
 
     //perform slice-to-volume registrations - skip the first iteration 
     if (iter>0)
@@ -823,10 +823,10 @@ int main(int argc, char **argv)
     //number of reconstruction iterations
     if ( iter==(iterations-1) ) 
     {
-      rec_iterations = 30;      
+      rec_iterations = 21;      
     }
     else 
-      rec_iterations = 10;
+      rec_iterations = 7;
     
     if ((bspline)&&(!robust_statistics)&&(!intensity_matching))
       rec_iterations=0;
@@ -835,7 +835,7 @@ int main(int argc, char **argv)
     i=0;
     for (i=0;i<rec_iterations;i++)
     {
-      cout<<endl<<"  Reconstruction iteration "<<i<<". "<<endl;
+      cout<<endl<<"  Reconstruction iteration "<<i<<" out of "<<rec_iterations<<". "<<endl;
       
       if (intensity_matching)
       {
