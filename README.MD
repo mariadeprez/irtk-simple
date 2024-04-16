@@ -45,11 +45,11 @@ King's College London <br>
 *************************************************************************************
 *************************************************************************************		
 
-### ABOUT Image Registration Toolkit (IRTK)
+## ABOUT Image Registration Toolkit (IRTK)
 
-Authors: 
-Daniel Rueckert
-Julia Schnabel
+Authors: <br> 
+Daniel Rueckert <br>
+Julia Schnabel <br>
 
 See the COPYRIGHT file in this directory for more information on the copyright and 
 license agreement for the software.
