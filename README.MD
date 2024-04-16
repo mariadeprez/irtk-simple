@@ -26,9 +26,12 @@ to ensure compatibility of the version.
 
 * Build
 
-	cd irtk-simple
+	cd irtk-simple<br>
+
 	mkdir build
+
 	cd build
+
 	cmake ..
 	make
 
