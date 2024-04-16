@@ -38,9 +38,9 @@ to ensure compatibility of the version.
 
 The motion correction software was created and is distributed by
 
-Maria Deprez (Kuklisova Murgasova)
-Department of Biomedical Engineering
-King's College London
+Maria Deprez (Kuklisova Murgasova) <br> 
+Department of Biomedical Engineering <br>
+King's College London <br>
 
 *************************************************************************************
 *************************************************************************************		
