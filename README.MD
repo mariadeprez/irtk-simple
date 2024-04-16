@@ -26,13 +26,10 @@ to ensure compatibility of the version.
 
 * Build
 
-	cd irtk-simple<br>
-
-	mkdir build
-
-	cd build
-
-	cmake ..
+	cd irtk-simple <br>
+	mkdir build <br>
+	cd build <br>
+	cmake .. <br>
 	make
 
 * run the executable to display input arguments and options
