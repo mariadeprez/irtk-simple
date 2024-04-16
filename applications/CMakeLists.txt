@@ -1,0 +1,35 @@
+LINK_LIBRARIES(contrib++ image++ geometry++ common++) 
+IF (USE_VXL)
+  LINK_LIBRARIES(irtkvnl irtkvcl irtkvnl_algo irtknetlib)
+ELSE (USE_VXL)
+  LINK_LIBRARIES(recipes)
+ENDIF (USE_VXL)
+
+# Convenience macros
+MACRO(ADD_IRTK_EXECUTABLE name)
+  ADD_EXECUTABLE(${name} ${name}.cc ${ARGN})
+  INSTALL_TARGETS(/bin ${name})
+ENDMACRO(ADD_IRTK_EXECUTABLE name)
+
+
+  ADD_IRTK_EXECUTABLE(convert)
+  ADD_IRTK_EXECUTABLE(dilation)
+  ADD_IRTK_EXECUTABLE(erosion)
+  ADD_IRTK_EXECUTABLE(info)
+  ADD_IRTK_EXECUTABLE(region)
+  ADD_IRTK_EXECUTABLE(binarize)
+  ADD_IRTK_EXECUTABLE(blur)
+  ADD_IRTK_EXECUTABLE(closing)
+  ADD_IRTK_EXECUTABLE(dicemetric)
+  ADD_IRTK_EXECUTABLE(labelStats)
+  ADD_IRTK_EXECUTABLE(makevolume)
+  ADD_IRTK_EXECUTABLE(makesequence)
+  ADD_IRTK_EXECUTABLE(opening)
+  ADD_IRTK_EXECUTABLE(reflect)
+  ADD_IRTK_EXECUTABLE(resample)
+  ADD_IRTK_EXECUTABLE(rescale)
+  ADD_IRTK_EXECUTABLE(rescale_real)
+  ADD_IRTK_EXECUTABLE(temporalalign)
+  ADD_IRTK_EXECUTABLE(splitvolume)
+    
+

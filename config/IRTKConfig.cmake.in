@@ -1,0 +1,58 @@
+#-----------------------------------------------------------------------------
+#
+# IRTKConfig.cmake - IRTK CMake configuration file for external projects.
+#
+# SETS
+# IRTK_INCLUDE_DIRS -- all include directories
+# IRTK_LIBRARIES_DIR -- the directory for the linrary in the built tree
+# IRTK_LIBRARIES -- the name of the IRTK libraries
+
+# The IRTK include file directories.
+SET(IRTK_SOURCE_DIR "@IRTK_SOURCE_DIR@")
+
+SET(IRTK_INCLUDE_DIRS "@IRTK_INCLUDE_DIRS@")
+
+SET(IRTK_LIBRARIES_DIR "@IRTK_LIBRARIES_DIR@") 
+
+SET(IRTK_LIBRARIES segmentation++ reconstruction++ registration++ transformation++ contrib++
+image++ geometry++ common++ recipes) 
+
+IF (@BUILD_CONDOR_EXE_FLAG@)
+   SET (CMAKE_X_LIBS "-lGL -L/usr/X11R6/lib -lm -lXext -lXt -lSM -lX11  -lICE -ldl -lnsl")
+   SET (CMAKE_MODULE_LINK_FLAGS "-static")
+   SET (CMAKE_SHLIB_LINK_FLAGS "-static")
+ENDIF (@BUILD_CONDOR_EXE_FLAG@)
+
+IF (@BUILD_WITH_TBB_FLAG@)
+   ADD_DEFINITIONS(-DHAS_TBB)
+   SET(TBB_DIR "" CACHE PATH "Path to where TBB is installed")
+   SET(TBB_INCLUDE_DIR ${TBB_DIR}/include)
+   SET(TBB_LIB_DIR ${TBB_DIR}/lib)
+   INCLUDE_DIRECTORIES(${TBB_INCLUDE_DIR})
+   LINK_DIRECTORIES(${TBB_LIB_DIR})
+   SET(IRTK_LIBRARIES ${IRTK_LIBRARIES} tbb)
+ENDIF(@BUILD_WITH_TBB_FLAG@)
+
+IF (@ZLIB_FOUND_FLAG@)
+  ADD_DEFINITIONS(-DHAS_ZLIB)
+  INCLUDE_DIRECTORIES(@ZLIB_INCLUDE_DIR@)
+  SET(IRTK_LIBRARIES ${IRTK_LIBRARIES} @ZLIB_LIBRARIES@)
+ENDIF (@ZLIB_FOUND_FLAG@)
+
+# Options to build with nifti, znz and possibly fslio
+IF(@BUILD_WITH_NIFTI_FLAG@)
+   ADD_DEFINITIONS(-DHAS_NIFTI)
+   INCLUDE_DIRECTORIES(${IRTK_SOURCE_DIR}/nifti/niftilib)
+   INCLUDE_DIRECTORIES(${IRTK_SOURCE_DIR}/nifti/znzlib)
+   SET(IRTK_LIBRARIES ${IRTK_LIBRARIES} znz)
+   SET(IRTK_LIBRARIES ${IRTK_LIBRARIES} niftiio)
+ENDIF(@BUILD_WITH_NIFTI_FLAG@)
+
+IF (WIN32)
+  ADD_DEFINITIONS(-DvtkCommon_EXPORTS)
+ELSE (WIN32)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffloat-store -Wall -O2 -Wno-deprecated -Wno-write-strings")
+ENDIF (WIN32)
+
+ADD_DEFINITIONS(-DIMPERIAL -DANSI -DHAS_CONTRIB -DNO_BOUNDS -DENABLE_UNIX_COMPRESS)
+
