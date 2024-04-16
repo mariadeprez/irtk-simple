@@ -22,7 +22,7 @@ to ensure compatibility of the version.
 
 * Download package from the Gitlab repository
 
-	git clone git@gitlab.com:mariadeprez/irtk-simple.git
+	git clone git@github.com:mariadeprez/irtk-simple.git
 
 * Build
 
