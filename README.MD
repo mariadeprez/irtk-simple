@@ -23,7 +23,8 @@ to ensure compatibility of the version.
 * Download package from the Gitlab repository
 
 	git clone https://github.com/mariadeprez/irtk-simple.git
-  	(you will need to enter your username and the personal token that you created)
+  	
+	<br>(you will need to enter your username and the personal token)
 
 * Build
 
