@@ -1297,7 +1297,9 @@ double irtkReconstruction::Consistency()
 	if(_slices[ind](i,j,0)>0)
 	  if(_simulated_weights[ind](i,j,0)>0.99)
 	  {
-	    diff = _slices[ind](i,j,0)*exp(-_bias[ind](i, j, 0)) * _scale[ind] - _simulated_slices[ind](i,j,0);
+            // SWITCH direction of intensity matching  
+	    //diff = _slices[ind](i,j,0)*exp(-_bias[ind](i, j, 0)) * _scale[ind] - _simulated_slices[ind](i,j,0);
+            diff = _slices[ind](i,j,0) - _simulated_slices[ind](i,j,0) * exp(_bias[ind](i, j, 0)) / _scale[ind];
 	    sum+=diff*diff;
 	    num++;
 	  }
@@ -3138,6 +3140,9 @@ public:
         for ( size_t inputIndex = r.begin(); inputIndex < r.end(); ++inputIndex) {
             // read the current slice
             irtkRealImage slice = reconstructor->_slices[inputIndex];
+            
+            // read the current slice
+            irtkRealImage sim = reconstructor->_simulated_slices[inputIndex];
                 
             //read current weight image
             reconstructor->_weights[inputIndex] = 0;
@@ -3155,9 +3160,9 @@ public:
                     if (slice(i, j, 0) != -1) {
                         //bias correct and scale the slice
 		        if(reconstructor->_intensity_matching_GD)
-			  slice(i, j, 0) *= b(i, j, 0) * scale;
+			  sim(i, j, 0) *= b(i, j, 0) / scale;
 			else
-			  slice(i, j, 0) *= exp(-b(i, j, 0)) * scale;
+			  sim(i, j, 0) *= exp(b(i, j, 0)) / scale;
 
                         //number of volumetric voxels to which
                         // current slice voxel contributes
@@ -3168,7 +3173,7 @@ public:
 
                         if ( (n>0) &&
                              (reconstructor->_simulated_weights[inputIndex](i,j,0) > 0) ) {
-                            slice(i,j,0) -= reconstructor->_simulated_slices[inputIndex](i,j,0);
+                            slice(i,j,0) -= sim(i,j,0);
 
                             //calculate norm and voxel-wise weights
                       
@@ -3470,6 +3475,9 @@ public:
 
             // alias the current slice
             irtkRealImage& slice = reconstructor->_slices[inputIndex];
+            
+            // alias the current slice
+            irtkRealImage& sim = reconstructor->_simulated_slices[inputIndex];
 
             //alias the current weight image
             irtkRealImage& w = reconstructor->_weights[inputIndex];
@@ -3490,9 +3498,9 @@ public:
 			    if(reconstructor->_intensity_matching_GD)
 			      eb=b(i,j,0);
 			    else
-			      eb = exp(-b(i, j, 0));
-                            scalenum += w(i, j, 0) * slice(i, j, 0) * eb * reconstructor->_simulated_slices[inputIndex](i, j, 0);
-                            scaleden += w(i, j, 0) * slice(i, j, 0) * eb * slice(i, j, 0) * eb;
+			      eb = exp(b(i, j, 0));
+                            scaleden += w(i, j, 0) * slice(i, j, 0) * eb * sim(i, j, 0);
+                            scalenum += w(i, j, 0) * sim(i, j, 0) * eb * sim(i, j, 0) * eb;
                         }
                     }
 
@@ -3553,7 +3561,10 @@ public:
         for ( size_t inputIndex = r.begin(); inputIndex < r.end(); ++inputIndex) {
             // read the current slice
             irtkRealImage slice = reconstructor->_slices[inputIndex];
-                
+            
+            // read the current slice
+            irtkRealImage sim = reconstructor->_simulated_slices[inputIndex];
+                                
             //alias the current weight image
             irtkRealImage& w = reconstructor->_weights[inputIndex];
                 
@@ -3567,8 +3578,7 @@ public:
             irtkRealImage wb = w;
 	    irtkRealImage m = w;
 	    m=1;
-	    irtkRealImage sim = reconstructor->_simulated_slices[inputIndex];
-	    
+
 	    char buffer[255];
 
             //simulated slice
@@ -3584,18 +3594,18 @@ public:
                     if (slice(i, j, 0) != -1) {
                         if( reconstructor->_simulated_weights[inputIndex](i,j,0) > 0.99 ) {
                             //bias-correct and scale current slice
-                            double eb = exp(-b(i, j, 0));
-                            slice(i, j, 0) *= (eb * scale);
+                            double eb = exp(b(i, j, 0));
+                            sim(i, j, 0) *= (eb / scale);
 
                             //calculate weight image
-                            wb(i, j, 0) = w(i, j, 0) * slice(i, j, 0);
+                            wb(i, j, 0) = w(i, j, 0) * sim(i, j, 0);
 
                             //calculate weighted residual image
                             //make sure it is far from zero to avoid numerical instability
                             //if ((sim(i,j,0)>_low_intensity_cutoff*_max_intensity)&&(slice(i,j,0)>_low_intensity_cutoff*_max_intensity))
                             if ( (reconstructor->_simulated_slices[inputIndex](i, j, 0) > 1) && (slice(i, j, 0) > 1)) {
-                                wresidual(i, j, 0) = log(slice(i, j, 0) / reconstructor->_simulated_slices[inputIndex](i, j, 0)) * wb(i, j, 0);
-                                residual(i, j, 0) = log(slice(i, j, 0) / reconstructor->_simulated_slices[inputIndex](i, j, 0));
+                                wresidual(i, j, 0) = log(slice(i, j, 0) / sim(i, j, 0)) * wb(i, j, 0);
+                                residual(i, j, 0) = log(slice(i, j, 0) / sim(i, j, 0));
 
                             }
                         }
@@ -3978,6 +3988,9 @@ public:
         for ( size_t inputIndex = r.begin(); inputIndex < r.end(); ++inputIndex) {
             // read the current slice
             irtkRealImage slice = reconstructor->_slices[inputIndex];
+            
+            // read the current slice
+            irtkRealImage sim = reconstructor->_simulated_slices[inputIndex];
                 
             //read the current weight image
             irtkRealImage& w = reconstructor->_weights[inputIndex];
@@ -3997,12 +4010,12 @@ public:
                     if (slice(i, j, 0) != -1) {
                         //bias correct and scale the slice
 		        if(reconstructor->_intensity_matching_GD)
-			  slice(i, j, 0) *= b(i, j, 0) * scale;
+			  sim(i, j, 0) *= b(i, j, 0) / scale;
 			else
-                          slice(i, j, 0) *= exp(-b(i, j, 0)) * scale;
+                          sim(i, j, 0) *= exp(b(i, j, 0)) / scale;
                         
                         if ( reconstructor->_simulated_slices[inputIndex](i,j,0) > 0 )
-                            slice(i,j,0) -= reconstructor->_simulated_slices[inputIndex](i,j,0);
+                            slice(i,j,0) -= sim(i,j,0);
                         else
                             slice(i,j,0) = 0;
 
@@ -4011,14 +4024,14 @@ public:
                             p = reconstructor->_volcoeffs[inputIndex][i][j][k];
 			    if(reconstructor->_robust_slices_only)
 			    {
-                              addon(p.x, p.y, p.z) += p.value * slice(i, j, 0) * reconstructor->_slice_weight[inputIndex];
-                              confidence_map(p.x, p.y, p.z) += p.value * reconstructor->_slice_weight[inputIndex];
+                              addon(p.x, p.y, p.z) += p.value * slice(i, j, 0) * reconstructor->_slice_weight[inputIndex] * exp(b(i, j, 0)) / scale;
+                              confidence_map(p.x, p.y, p.z) += p.value * reconstructor->_slice_weight[inputIndex] * exp(b(i, j, 0)) / scale;
 			      
 			    }
 			    else
 			    {
-                              addon(p.x, p.y, p.z) += p.value * slice(i, j, 0) * w(i, j, 0) * reconstructor->_slice_weight[inputIndex];
-                              confidence_map(p.x, p.y, p.z) += p.value * w(i, j, 0) * reconstructor->_slice_weight[inputIndex];
+                              addon(p.x, p.y, p.z) += p.value * slice(i, j, 0) * w(i, j, 0) * reconstructor->_slice_weight[inputIndex] * exp(b(i, j, 0)) / scale;
+                              confidence_map(p.x, p.y, p.z) += p.value * w(i, j, 0) * reconstructor->_slice_weight[inputIndex] * exp(b(i, j, 0)) / scale;
 			    }
                         }
                     }
@@ -4140,6 +4153,9 @@ public:
         for ( size_t inputIndex = r.begin(); inputIndex < r.end(); ++inputIndex) {
             // read the current slice
             irtkRealImage slice = reconstructor->_slices[inputIndex];
+            
+            // read the current slice
+            irtkRealImage sim = reconstructor->_simulated_slices[inputIndex];
                 
             //alias the current weight image
             irtkRealImage& w = reconstructor->_weights[inputIndex];
@@ -4156,13 +4172,13 @@ public:
                     if (slice(i, j, 0) != -1) {
                         //bias correct and scale the slice
 		        if(reconstructor->_intensity_matching_GD)
-			  slice(i, j, 0) *= b(i, j, 0) * scale;
+			  sim(i, j, 0) *= b(i, j, 0) / scale;
 			else
-                          slice(i, j, 0) *= exp(-b(i, j, 0)) * scale;
+                          sim(i, j, 0) *= exp(b(i, j, 0)) / scale;
 
                         //otherwise the error has no meaning - it is equal to slice intensity
                         if ( reconstructor->_simulated_weights[inputIndex](i,j,0) > 0.99 ) {
-                            slice(i,j,0) -= reconstructor->_simulated_slices[inputIndex](i,j,0);
+                            slice(i,j,0) -= sim(i,j,0);
                             
                             //sigma and mix
                             double e = slice(i, j, 0);
