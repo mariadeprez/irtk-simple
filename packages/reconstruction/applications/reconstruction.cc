@@ -854,8 +854,8 @@ int main(int argc, char **argv)
       
       if (intensity_matching)
       {
-        //if((sigma>0)&&(!global_bias_correction))
-          //reconstruction.NormaliseBias(i);
+        if((sigma>0)&&(!global_bias_correction))
+          reconstruction.NormaliseBias(i);
       }
 
       // Simulate slices (needs to be done
