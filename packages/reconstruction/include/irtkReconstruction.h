@@ -464,7 +464,7 @@ class irtkReconstruction : public irtkObject
     void SimulateStacks(vector<irtkRealImage>& stacks, bool threshold = false);
 
     void SimulateSlices();
-    double Consistency();
+    double Consistency(bool exclude_slices = false);
   
     ///Puts origin of the image into origin of world coordinates
     void ResetOrigin( irtkGreyImage &image,

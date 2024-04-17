@@ -1287,26 +1287,28 @@ void irtkReconstruction::SetTemplateImage(irtkRealImage t, irtkRigidTransformati
 
 }
 
-double irtkReconstruction::Consistency()
+double irtkReconstruction::Consistency(bool exclude_slices)
 {
   double sum = 0, num = 0, diff;
   for(int ind=0;ind<_slices.size();ind++)
   {
+    if((!exclude_slices)||(_slice_weight[ind]>0.5))
+    {
     for (int i=0; i<_slices[ind].GetX();i++)
       for (int j=0; j<_slices[ind].GetY();j++)
 	if(_slices[ind](i,j,0)>0)
 	  if(_simulated_weights[ind](i,j,0)>0.99)
 	  {
-            // SWITCH direction of intensity matching  
-	    //diff = _slices[ind](i,j,0)*exp(-_bias[ind](i, j, 0)) * _scale[ind] - _simulated_slices[ind](i,j,0);
-            diff = _slices[ind](i,j,0) - _simulated_slices[ind](i,j,0) * exp(_bias[ind](i, j, 0)) / _scale[ind];
+	    diff = _slices[ind](i,j,0) - _simulated_slices[ind](i,j,0) * exp(_bias[ind](i, j, 0)) / _scale[ind];
 	    sum+=diff*diff;
 	    num++;
 	  }
+    }
   }
   
   return sqrt(sum/num);
 }
+
 
 
 void irtkReconstruction::StackRegistrations(vector<irtkRealImage>& stacks,

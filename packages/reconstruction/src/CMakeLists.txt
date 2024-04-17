@@ -1,11 +1,15 @@
 SET(RECONSTRUCTION_INCLUDES
 ../include/irtkBSplineReconstruction.h
 ../include/irtkReconstruction.h
+../include/irtkReconstructionDTI.h
+../include/irtkSphericalHarmonics.h
 )
 
 SET(RECONSTRUCTION_SRCS
 irtkBSplineReconstruction.cc
 irtkReconstruction.cc
+irtkReconstructionDTI.cc
+irtkSphericalHarmonics.cc
 )
 
 
