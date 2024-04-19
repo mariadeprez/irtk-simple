@@ -1,1 +1,5 @@
 build
+packages/reconstruction/applications/CMakeLists.txt
+packages/reconstruction/applications/reconstruction-diffcode.cc
+packages/reconstruction/include/irtkReconstruction-diffcode.h
+packages/reconstruction/src/irtkReconstruction-diffcode.cc

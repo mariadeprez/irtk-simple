@@ -3,6 +3,8 @@ SET(RECONSTRUCTION_INCLUDES
 ../include/irtkReconstruction.h
 ../include/irtkReconstructionDTI.h
 ../include/irtkSphericalHarmonics.h
+../include/irtkLaplacianSmoothing.h
+../include/irtkReconstructionb0.h
 )
 
 SET(RECONSTRUCTION_SRCS
@@ -10,6 +12,8 @@ irtkBSplineReconstruction.cc
 irtkReconstruction.cc
 irtkReconstructionDTI.cc
 irtkSphericalHarmonics.cc
+irtkLaplacianSmoothing.cc
+irtkReconstructionb0.cc
 )
 
 
