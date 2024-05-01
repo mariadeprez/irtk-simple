@@ -547,6 +547,7 @@ int main(int argc, char **argv)
 
       ok = true;
     }
+    /*
     //Read stack group number
     if ((ok == false) && (strcmp(argv[1], "-group") == 0)){
       argc--;
@@ -581,41 +582,42 @@ int main(int argc, char **argv)
     
       ok = true;
     }
+    */
 
     //Read phase encoding direction
     if ((ok == false) && (strcmp(argv[1], "-phase") == 0)){
       argc--;
       argv++;
+      /*
       if(groups.size()==0)
       {
 	cout<<"Please give groups before phase encoding direction (one per group)"<<endl;
 	exit(1);
       }
+      */
       cout<< "Phase encoding is ";
-      for (i=0;i<groups.size();i++)
+      if (strcmp(argv[1], "x") == 0)
       {
-        if (strcmp(argv[1], "x") == 0)
-	{
           swap.push_back(false);
 	  cout<<"x"<<" ";
           argc--;
           argv++;
-	}
-	else 
-	{
+      }
+      else 
+      {
 	  if (strcmp(argv[1], "y") == 0)
 	  {
             swap.push_back(true);
 	    cout<<"y"<<" ";
             argc--;
             argv++;
-	  }
-	  else
+          }
+          else
 	  {
 	    cerr<<"Unexpected phase encoding axis."<<endl;
 	    exit(1);
 	  }
-	}
+	//}
        }
        cout<<"."<<endl;
        cout.flush();
@@ -650,6 +652,11 @@ int main(int argc, char **argv)
   irtkRealImage reconstructed;
 
   //Set up for distortion
+  for (i=0;i<nStacks;i++)
+  {
+     stack_group.push_back(1);
+  }
+  groups.push_back(1);
   reconstruction.SetGroups(stack_group, groups, swap);
 
   //Set debug mode
