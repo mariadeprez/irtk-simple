@@ -273,9 +273,10 @@ int main(int argc, char **argv)
       {
         thickness.push_back(atof(argv[1]));
 	cout<<thickness[i]<<" ";
-        argc--;
-        argv++;
+
        }
+       argc--;
+       argv++;
        cout<<"."<<endl;
        cout.flush();
       ok = true;
@@ -290,9 +291,9 @@ int main(int argc, char **argv)
       {
         packages.push_back(atoi(argv[1]));
 	cout<<packages[i]<<" ";
-        argc--;
-        argv++;
        }
+       argc--;
+       argv++;
        cout<<"."<<endl;
        cout.flush();
       ok = true;
