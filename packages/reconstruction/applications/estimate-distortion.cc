@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 
     
   // Default values.
-  int templateNumber=-1;
+  int templateNumber=0;
   irtkRealImage *mask=NULL;
   irtkRealImage b0_mask,T2_mask;
   int iterations = 9;
@@ -220,13 +220,13 @@ int main(int argc, char **argv)
   for (i=0;i<nStacks;i++)
   {
     //stack_files.push_back(argv[1]);
-    stack.GetRegion(0, 0, 0, i, b0_stacks.GetX(), b0_stacks.GetY(), b0_stacks.GetT(), i+1);
-    cout<<"Reading stack ... "<<argv[1]<<endl;
-    cout.flush();
-    argc--;
-    argv++;
+    //cerr<<i<<" "<<b0_stacks.GetX()<<" "<<b0_stacks.GetY()<<" "<<b0_stacks.GetZ()<<" "<<i+1<<endl;  
+    stack=b0_stacks.GetRegion(0, 0, 0, i, b0_stacks.GetX(), b0_stacks.GetY(), b0_stacks.GetZ(), i+1);
     stacks.push_back(stack);
   }
+  
+    //cerr<<"Done reading stacks."<<endl;
+
   
   //Initialise transformation
   
@@ -236,13 +236,13 @@ int main(int argc, char **argv)
     /*cout<<"Reading transformation ... "<<argv[1]<<" ... ";
     cout.flush();
     if (strcmp(argv[1], "id") == 0)
-    {
-      transformation = new irtkRigidTransformation;
-      if ( templateNumber < 0) templateNumber = i;
+    {*/
+    transformation = new irtkRigidTransformation;
+    /*  if ( templateNumber < 0) templateNumber = i;
     }
     else
     {
-    */
+    
       transformation = irtkTransformation::New(argv[1]);
     //}
     //cout<<" done."<<endl;
@@ -250,12 +250,16 @@ int main(int argc, char **argv)
 
     //argc--;
     //argv++;
+    */
     irtkRigidTransformation *rigidTransf = dynamic_cast<irtkRigidTransformation*> (transformation);
     stack_transformations.push_back(*rigidTransf);
     delete rigidTransf;
   }
   reconstruction.InvertStackTransformations(stack_transformations);
 
+  //cerr<<"Done with main arguments."<<endl;
+      //exit(1);
+      
   // Parse options.
   while (argc > 1){
     ok = false;
