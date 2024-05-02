@@ -5397,8 +5397,15 @@ void irtkReconstruction::SlicesInfo( const char* filename,
 /* Package specific functions */
 void irtkReconstruction::SplitImage(irtkRealImage image, int packages, vector<irtkRealImage>& stacks)
 {
+    
+  if (packages==1)
+  {
+    stacks.push_back(image);
+  }
+  else
+  {
+        
     irtkImageAttributes attr = image.GetImageAttributes();
-  
     //slices in package
     int pkg_z = attr._z/packages;
     double pkg_dz = attr._dz*packages;
@@ -5451,7 +5458,7 @@ void irtkReconstruction::SplitImage(irtkRealImage image, int packages, vector<ir
         stacks.push_back(stack);
     }
     cout<<"done."<<endl;
-
+  }
 }
 
 void irtkReconstruction::SplitImageEvenOdd(irtkRealImage image, int packages, vector<irtkRealImage>& stacks)

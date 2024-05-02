@@ -139,7 +139,7 @@ int main(int argc, char **argv)
   int templateNumber=0;
   irtkRealImage *mask=NULL;
   irtkRealImage b0_mask,T2_mask;
-  int iterations = 9;
+  int iterations = 2;
   bool debug = false;
   double sigma=20;
   double resolution = 0.75;
@@ -297,6 +297,16 @@ int main(int argc, char **argv)
        cout<<"."<<endl;
        cout.flush();
       ok = true;
+    }
+    
+    if (packages.size()==0)
+    {
+      cout<< "Package number is ";
+      for (i=0;i<nStacks;i++)
+      {
+        packages.push_back(1);
+	cout<<packages[i]<<" ";
+       }
     }
 
     //Read binary mask for final volume
@@ -1168,21 +1178,27 @@ int main(int argc, char **argv)
    cout<<endl;
    cout.flush();
    cout.rdbuf (strm_buffer); 
+   
+   cerr<<"Saving b0 volume ... ";
    reconstructed=reconstruction.GetReconstructed();
    reconstructed.Write(b0_output_name);
+   cerr<<"done."<<endl;
    
   } // end of reconstuction if statement
    
+   cerr<<"Saving slice info ";
   
   
-  if ( info_filename.length() > 0 )
-    reconstruction.SlicesInfo( info_filename.c_str(),
-                               stack_files );
+  //if ( info_filename.length() > 0 )
+  //  reconstruction.SlicesInfo( info_filename.c_str(),
+  //                             stack_files );
     
+   cerr<<"Saving corrected stacks ... ";
   
   //Write corrected stacks
   irtkRealImage corrected = MakeSequence(corrected_stacks);
   corrected.Write(output_name);
+   cerr<<"done."<<endl;
   
   //Write fieldmap
   if (save_fieldmap)
