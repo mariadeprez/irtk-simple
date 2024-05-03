@@ -3,7 +3,7 @@
 
 **irtk-simple** is a  software package has been created to distribute software for motion correction 
 and super-resolution reconstruction of **structural and diffusion MRI of the fetal brain**. The reconstruction algorithms
-were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within IRTK sofware package.
+were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within [IRTK](https://biomedia.doc.ic.ac.uk/software/irtk/) sofware package.
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
