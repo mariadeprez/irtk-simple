@@ -299,16 +299,6 @@ int main(int argc, char **argv)
       ok = true;
     }
     
-    if (packages.size()==0)
-    {
-      cout<< "Package number is ";
-      for (i=0;i<nStacks;i++)
-      {
-        packages.push_back(1);
-	cout<<packages[i]<<" ";
-       }
-    }
-
     //Read binary mask for final volume
     if ((ok == false) && (strcmp(argv[1], "-mask") == 0)){
       argc--;
@@ -656,6 +646,19 @@ int main(int argc, char **argv)
     cout<<"."<<endl;
     cout.flush();
   }
+
+  
+  // Initialise packages if not given by user
+      
+    if (packages.size()==0)
+    {
+      cout<< "Package number is ";
+      for (i=0;i<nStacks;i++)
+      {
+        packages.push_back(1);
+	cout<<packages[i]<<" ";
+       }
+    }
 
   
   //Output volume
@@ -1010,11 +1013,12 @@ int main(int argc, char **argv)
         }
       }
 
+      corrected_stacks.push_back(output);
+      
       if (debug)
       {
         sprintf(buffer,"cor%i-%i.nii.gz",iter,index);
         output.Write(buffer);
-        corrected_stacks.push_back(output);
       }
 
     }
@@ -1179,26 +1183,27 @@ int main(int argc, char **argv)
    cout.flush();
    cout.rdbuf (strm_buffer); 
    
-   cerr<<"Saving b0 volume ... ";
+   cout<<"Saving b0 volume ... ";
    reconstructed=reconstruction.GetReconstructed();
    reconstructed.Write(b0_output_name);
-   cerr<<"done."<<endl;
+   cout<<"done."<<endl;
    
   } // end of reconstuction if statement
    
-   cerr<<"Saving slice info ";
+   //cerr<<"Saving slice info ";
   
   
   //if ( info_filename.length() > 0 )
   //  reconstruction.SlicesInfo( info_filename.c_str(),
   //                             stack_files );
     
-   cerr<<"Saving corrected stacks ... ";
+   cout<<"Saving corrected stacks ... ";
   
   //Write corrected stacks
   irtkRealImage corrected = MakeSequence(corrected_stacks);
   corrected.Write(output_name);
-   cerr<<"done."<<endl;
+  
+  cout<<"done."<<endl;
   
   //Write fieldmap
   if (save_fieldmap)
