@@ -116,8 +116,8 @@ int main(int argc, char **argv)
   int iterations = 3;
   bool debug = false;
   bool save_transformations = false;
-  double sigma=30;
-  double resolution = 1;
+  double sigma=20;
+  double resolution = 0;
   double lambda = 0.02;
   double delta = 0.001;
   int regul_steps = 0;
@@ -153,10 +153,10 @@ int main(int argc, char **argv)
   int sr_sh_iterations = 10;
   double sh_alpha = 5;
   
-  bool motion_model_hs = false;
+  bool motion_model_hs = true;
   bool motion = true;
   
-  double motion_sigma = 5;
+  double motion_sigma = 15;
   
   int order = 4;
   double lambdaLB = 0;//0.05;
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
   output_name = argv[1];
   argc--;
   argv++;
-  cout<<"Recontructed volume name ... "<<output_name<<endl;
+  cout<<"Recontructed DWI volume name ... "<<output_name<<endl;
 
   //read 4D image
   irtkRealImage image4D;
@@ -202,7 +202,7 @@ int main(int argc, char **argv)
   // Read stacks 
   for (i=0;i<nStacks;i++)
   {
-    cout<<"Stack "<<i<<endl; cout.flush();
+    //cout<<"Stack "<<i<<endl; cout.flush();
     stacks.push_back(image4D.GetRegion(0,0,0,i,attr._x, attr._y,attr._z,i+1));
     corrected_stacks.push_back(stacks[i]);
     if (debug)
@@ -230,7 +230,8 @@ int main(int argc, char **argv)
   cout<<"Initial transformation is "<<argv[1]<<endl;
   argc--;
   argv++;
-  orient.Print();
+  if (debug)
+    orient.Print();
 
 
  
@@ -281,7 +282,7 @@ int main(int argc, char **argv)
       for (i=0;i<nStacks;i++)
       {
         thickness.push_back(thick);
-	cout<<thickness[i]<<" ";
+	//cout<<thickness[i]<<" ";
        }
        cout<<"."<<endl;
       ok = true;
@@ -298,9 +299,9 @@ int main(int argc, char **argv)
       for (i=0;i<nStacks;i++)
       {
         packages.push_back(pnum);
-	cout<<packages[i]<<" ";        
+	//cout<<packages[i]<<" ";        
       }
-      cout<<"size="<<packages.size()<<endl;
+      //cout<<"size="<<packages.size()<<endl;
       cout<<"."<<endl;
       ok = true;
     }
@@ -733,7 +734,7 @@ int main(int argc, char **argv)
     reconstruction.InvertStackTransformations(stack_transformations);
   //}
 
-  //Initialise 2*slice thickness if not given by user
+  //Initialise slice thickness to isotropic if not given by user
   if (thickness.size()==0)
   {
     cout<< "Slice thickness is ";
@@ -741,9 +742,10 @@ int main(int argc, char **argv)
     {
       double dx,dy,dz;
       stacks[i].GetPixelSize(&dx,&dy,&dz);
-      thickness.push_back(dz*2);
-      cout<<thickness[i]<<" ";
+      thickness.push_back(dz);
+      //cout<<thickness[i]<<" ";
     }
+    cout<<thickness[0];
     cout<<"."<<endl;
   }
   
@@ -835,7 +837,15 @@ int main(int argc, char **argv)
   //if resolution==0 it will be determined from in-plane resolution of the image
   
   //resolution = reconstruction.CreateTemplate(stacks[templateNumber],resolution);
+  if (resolution==0)
+  {
+    double dx,dy,dz;
+    stacks[0].GetPixelSize(&dx,&dy,&dz);
+    resolution = dx;
+  }
+  
   resolution = reconstruction.CreateTemplate(target,resolution);
+  
   
   //Set mask to reconstruction object. 
   reconstruction.SetMaskOrient(mask,orient);   
@@ -927,11 +937,14 @@ int main(int argc, char **argv)
         slice_order.push_back(i*z+k);
       for(k=1;k<z;k=k+2) //odd
         slice_order.push_back(i*z+k);
-    }
+  }
     
-  for(i=0;i<slice_order.size();i++)
-    cout<<slice_order[i]<<" ";
-  cout<<"Number of slices: "<<slice_order.size();
+  if (debug)
+  {
+    for(i=0;i<slice_order.size();i++)
+      cout<<slice_order[i]<<" ";
+    cout<<"Number of slices: "<<slice_order.size();
+  }
   reconstruction.SetSliceOrder(slice_order);
   //exit(1);
   
@@ -979,20 +992,23 @@ int main(int argc, char **argv)
   if(recon_1D)
   {
     reconstruction.Set1DRecon();
-    cout<<"Setting 1D"<<endl;
+    if (debug)
+        cout<<"Setting 1D"<<endl;
   }
   else
   {
     if (recon_interpolate)
     {
       reconstruction.SetInterpolationRecon();
-       cout<<"Setting interpolate"<<endl;
+      if (debug)
+        cout<<"Setting interpolate"<<endl;
           
     }
     else
     {
       reconstruction.Set3DRecon();
-      cout<<"Setting 3D"<<endl;
+      if (debug)
+        cout<<"Setting 3D"<<endl;
     }
 
   }
@@ -1512,7 +1528,7 @@ int main(int argc, char **argv)
   ///////////////////
   //end of SH part
  
-  reconstruction.SimulateSignal();//dirs_xyz,order);
+  reconstruction.SimulateSignal(output_name=NULL);//dirs_xyz,order);
  
   if (debug || save_transformations)
       reconstruction.SaveTransformations();

@@ -68,7 +68,7 @@ class irtkReconstructionDTI : public irtkReconstruction
    void SuperresolutionDTI(int iter, bool tv = false, double sh_alpha = 5, double regDTI = 0);
    double LaplacianSmoothnessDTI();
    void SaveSHcoeffs(int iteration);
-   void SimulateSignal();
+   void SimulateSignal(char *output_name=NULL);
    void SimulateSignal(int iter);
    void SetLambdaLB(double lambda);
    void SetSliceOrder(vector<int> slice_order);

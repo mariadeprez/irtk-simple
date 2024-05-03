@@ -13,6 +13,10 @@ add image
 - [spherical harmonics reconstruction of diffusion MRI](https://github.com/mariadeprez/irtk-simple#diffusion-MRI)
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
 - [about irtk-simple](https://github.com/mariadeprez/irtk-simple#about-irtk-simple): why the package was created
+- [about irtk](https://github.com/mariadeprez/irtk-simple#about-irtk)
+- [disclaimer](https://github.com/mariadeprez/irtk-simple#disclaimer)
+
+
 
 
 References
@@ -103,19 +107,33 @@ fieldmapcorrect DWI_stacks.nii.gz corrected_DWI_stacks.nii.gz fieldmap.nii.gz -y
 To ensure that fieldmap is correctly applied, input the coordinate on which the correction should be performed, 
 e.g. `-x` or `-y`. If the direction in which the fieldmap needs to be applied descending, use option `-minus`.
 
-*************************************************************************************
-*************************************************************************************		
 
-## ABOUT Image Registration Toolkit (IRTK)
 
-Authors: <br> 
-Daniel Rueckert <br>
-Julia Schnabel <br>
+Diffusion MRI
+---
+This command reconstruct **diffusion weighed MRI (DWI) of the fetal brain** on the regular grid using **Sherical Harmonics representation**. Note that input signal `DWI_signal.nii.gz` should correspond 
+to a single b-value (e.g. b=1000). Gradient table `grad.b` needs to be in [MRtrix3](https://www.mrtrix.org/) format.
 
-See the COPYRIGHT file in this directory for more information on the copyright and 
-license agreement for the software.
+An example command:
+```bash
+reconstructionDWI DWI_recon.nii.gz DWI_signal.nii.gz grad.b T2-template.nii.gz orient.dof -mask $mask -packages 2 -resolution 2
+```
+The fetal brain in DWI signal is usually in random orientation, as it was positioned in the scanner space. The command asks for a T2 weighted structural brain MRI image in standard orientation `T2-template.nii.gz` and a rigid transformation `orient.dof` that approximatelly reorients the diffusion data to the T2 template space. To check that your files are correct, download IRTK viewer `rview` 
+[here](https://www.doc.ic.ac.uk/~dr/software/download.html) and check the alignment.
+```bash
+rview T2-template.nii.gz DWI_signal.nii.gz orient.dof
+```
+You can also create the transformation `orient.dof` manually in `rview`. It might be helpful to make sure that the origins of both images are set to zero to facilitate this, this can be achieved by IRTK command `headertool` also provided in this package.
 
-The non-rigid registration algorithms implemented in the software are described by 
+
+About IRTK
+---	
+
+IRTK stands for Image Registration Toolkit
+
+Authors: Daniel Rueckert and Julia Schnabel 
+
+The registration algorithms implemented in the software are described by 
 the following publications:
 
 J. A. Schnabel, D. Rueckert, M. Quist, J. M. Blackall, A. D. Castellano Smith, 
@@ -134,11 +152,8 @@ L. G. Hill, and D. J. Hawkes. Comparison and evaluation of rigid and non-rigid
 registration of breast MR images. Journal of Computer Assisted Tomography, 
 23:800-805, 1999.
 
-
-*************************************************************************************
-*************************************************************************************
-
-Disclaimer:
+Disclaimer
+---
 
 This software has been developed for research purposes only, and hence should not be 
 used as a diagnostic tool. In no event shall the authors or distributors be liable to 

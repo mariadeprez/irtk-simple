@@ -1328,20 +1328,23 @@ void irtkReconstructionDTI::CreateSliceDirections(vector< vector<double> >& dire
 {
   _directions = directions;
   _bvalues = bvalues;
-  
-  cout<<"B-values: ";
-  for(uint i=0;i<_bvalues.size(); i++)
-    cout<<_bvalues[i]<<" ";
-  cout<<endl;
 
-  cout<<"B-vectors: ";
-  for(uint j=0; j<_directions.size(); j++)
+  if (_debug)
   {
-    for(uint i=0;i<_directions[j].size(); i++)
-      cout<<_directions[j][i]<<" ";
+    cout<<"B-values: ";
+    for(uint i=0;i<_bvalues.size(); i++)
+      cout<<_bvalues[i]<<" ";
+    cout<<endl;
+
+    cout<<"B-vectors: ";
+    for(uint j=0; j<_directions.size(); j++)
+    {
+      for(uint i=0;i<_directions[j].size(); i++)
+        cout<<_directions[j][i]<<" ";
+      cout<<endl;
+    }
     cout<<endl;
   }
-  cout<<endl;
 }
 
 void irtkReconstructionDTI::InitSH(irtkMatrix dirs, int order)
@@ -1374,12 +1377,13 @@ void irtkReconstructionDTI::InitSHT(irtkMatrix dirs, int order)
   _coeffNum = sh.NforL(_order);
 }
 
-void irtkReconstructionDTI::SimulateSignal()//irtkMatrix dirs, int order)
+void irtkReconstructionDTI::SimulateSignal(char *output_name)//irtkMatrix dirs, int order)
 {
   irtkSphericalHarmonics sh;
   sh.InitSHT(_dirs,_order);//lambda,order);
   _simulated_signal=sh.Coeff2Signal(_SH_coeffs);
-  _simulated_signal.Write("_simulated_signal.nii.gz");
+  if (output_name!=NULL)
+   _simulated_signal.Write(output_name);
   //_SH_coeffs = sh.Signal2Coeff(_simulated_signal);
   //_SH_coeffs.Write("_SH_coeffs.nii.gz");
 }
