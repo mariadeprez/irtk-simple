@@ -1,8 +1,14 @@
 
 # SLICE TO VOLUME RECONSTRUCTION (SVR)
 
-This software package has been created to distribute software for motion correction 
-and super-resolution reconstruction of structural fetal MRI, described in 
+**irtk-simple** is a  software package has been created to distribute software for motion correction 
+and super-resolution reconstruction of structural and diffusion MRI. The reconstruction algorithms
+were developed and implemented by Dr Maria Deprez (Kuklisova Murgasova) withing IRTK sofware package.
+
+- [Installation] (https://github.com/mariadeprez/irtk-simple#Installation)
+
+
+fetal MRI, described in 
 
 Reconstruction of fetal brain MRI with intensity matching and complete outlier removal. 
 M Kuklisova-Murgasova, G Quaghebeur, MA Rutherford, JV Hajnal, JA Schanbel. 
