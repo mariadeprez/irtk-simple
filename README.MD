@@ -3,11 +3,14 @@
 
 During MRI acquisition fetus moves. Fast acquisition of 2D slices freezes motion in time. Between-slice motion is the corrected with slice-to-volume registration and the 3D volume is reconstructed using super-resolution reconstruction.
 
+add image
+
 [IRTK SIMPLE](https://github.com/mariadeprez/irtk-simple) is a  software package has been created to distribute software for motion correction and super-resolution reconstruction of **structural and diffusion MRI of the fetal brain**. The reconstruction algorithms
 were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within [IRTK](https://biomedia.doc.ic.ac.uk/software/irtk/) sofware package.
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
+- [about irtk-simple] (https://github.com/mariadeprez/irtk-simple#about):
 
 
 References
@@ -21,6 +24,8 @@ Reconstruction of fetal brain MRI with intensity matching and complete outlier r
 M Kuklisova-Murgasova, G Quaghebeur, MA Rutherford, JV Hajnal, JA Schanbel. 
 Medical Image Analysis 16(8), 2012. doi: [10.1016/j.media.2012.07.004](https://doi.org/10.1016/j.media.2012.07.004)
 
+About irtk-simple
+-----
 It is called SIMPLE IRTK - because it is based on a lightweight and easy to compile 
 subset of package Image Registration Toolkit (IRTK).
 
