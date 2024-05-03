@@ -98,9 +98,10 @@ the algorithm will not work correctly. The command will save corrected EPI stack
 The distortion should be estimated from the B0 diffusion stacks (non-diffusion waited, e.g. b=0) or fMRI stacks. For diffusion weighted (DWI) stacks (b>0) 
 the fieldmap estimated from the B0 stacks can be applied to correct them too. Example command:
 ```bash
-fieldmapcorrect DWI_stacks.nii.gz corrected_DWI_stacks.nii.gz fieldmap.nii.gz
-
+fieldmapcorrect DWI_stacks.nii.gz corrected_DWI_stacks.nii.gz fieldmap.nii.gz -y
 ```
+To ensure that fieldmap is correctly applied, input the coordinate on which the correction should be performed, 
+e.g. `-x` or `-y`. If the direction in which the fieldmap needs to be applied descending, use option `-minus`.
 
 *************************************************************************************
 *************************************************************************************		
