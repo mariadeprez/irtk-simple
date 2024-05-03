@@ -4,8 +4,7 @@
 During MRI acquisition fetus moves. Fast acquisition of 2D slices freezes motion in time. Between-slice motion is the corrected with slice-to-volume registration and the 3D volume is reconstructed using super-resolution reconstruction.
 
 ![moving fetus](https://github.com/mariadeprez/irtk-simple/blob/main/fetus.gif)
-![fetal MRI recon](https://github.com/mariadeprez/irtk-simple/blob/main/fetal_dMRI.png)
-<img src="fetal_dMRI.png" alt="fetal MRI recon" width="200"/>
+<img src="fetal_dMRI.png" alt="fetal MRI recon" width="400"/>
 
 [IRTK SIMPLE](https://github.com/mariadeprez/irtk-simple) is a  software package has been created to distribute software for motion correction and super-resolution reconstruction of **structural and diffusion MRI of the fetal brain**. The reconstruction algorithms were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within [IRTK](https://biomedia.doc.ic.ac.uk/software/irtk/) sofware package.
 
