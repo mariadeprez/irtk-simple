@@ -149,7 +149,7 @@ int main(int argc, char **argv)
   bool sh_only=false;
   bool _reset_robust_statistics = false;
   
-  int int_matching_first_iter = 0;
+  int int_matching_first_iter = 1;
   int sr_sh_iterations = 10;
   double sh_alpha = 5;
   
@@ -275,8 +275,9 @@ int main(int argc, char **argv)
     if ((ok == false) && (strcmp(argv[1], "-thickness") == 0)){
       argc--;
       argv++;
-      cout<< "Slice thickness is ";
+
       double thick = atof(argv[1]);
+            cout<< "Slice thickness is "<<thick;
       argc--;
       argv++;
       for (i=0;i<nStacks;i++)
@@ -295,14 +296,13 @@ int main(int argc, char **argv)
       int pnum = atoi(argv[1]);
       argc--;
       argv++;
-      cout<< "Package number is "<<pnum<<endl;
+      cout<< "Package number is "<<pnum<<"."<<endl;
       for (i=0;i<nStacks;i++)
       {
         packages.push_back(pnum);
 	//cout<<packages[i]<<" ";        
       }
       //cout<<"size="<<packages.size()<<endl;
-      cout<<"."<<endl;
       ok = true;
     }
 
@@ -954,7 +954,11 @@ int main(int argc, char **argv)
   
   //Set sigma for the bias field smoothing
   if (sigma>0)
+  {
     reconstruction.SetSigma(sigma);
+  }
+  cout<<"Bias sigma="<<sigma<<endl;
+
     //TEST
     //reconstruction.SetSigma(15);
   //else
