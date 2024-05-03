@@ -7,14 +7,14 @@ add image
 
 [IRTK SIMPLE](https://github.com/mariadeprez/irtk-simple) is a  software package has been created to distribute software for motion correction and super-resolution reconstruction of **structural and diffusion MRI of the fetal brain**. The reconstruction algorithms were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within [IRTK](https://biomedia.doc.ic.ac.uk/software/irtk/) sofware package.
 
-- [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
-- [reconstruction of structural MRI](https://github.com/mariadeprez/irtk-simple#structural-MRI)
-- [distortion correction for EPI](https://github.com/mariadeprez/irtk-simple#distortion-correction)
-- [spherical harmonics reconstruction of diffusion MRI](https://github.com/mariadeprez/irtk-simple#diffusion-MRI)
-- [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
-- [about irtk-simple](https://github.com/mariadeprez/irtk-simple#about-irtk-simple): why the package was created
-- [about irtk](https://github.com/mariadeprez/irtk-simple#about-irtk)
-- [disclaimer](https://github.com/mariadeprez/irtk-simple#disclaimer)
+- [installation](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#installation): Install and compile on UBUNTU
+- [reconstruction of structural MRI](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#structural-mri)
+- [distortion correction for EPI](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#distortion-correction)
+- [spherical harmonics reconstruction of diffusion MRI](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#diffusion-mri)
+- [references](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#references): Read detailed description of reconstruction algorithms
+- [about irtk-simple](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#about-irtk-simple): why the package was created
+- [about irtk](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#about-irtk)
+- [disclaimer](https://github.com/mariadeprez/irtk-simple?tab=readme-ov-file#disclaimer)
 
 
 
@@ -135,6 +135,13 @@ The fetal brain in DWI signal is usually in random orientation, as it was positi
 rview T2-template.nii.gz DWI_signal.nii.gz orient.dof
 ```
 You can also create the transformation `orient.dof` manually in `rview`. It might be helpful to make sure that the origins of both images are set to zero to facilitate this, this can be achieved by IRTK command `headertool` also provided in this package.
+
+The reconstructed signal `DWI_recon.nii.gz` can be viewed in `rview`. However, visualisation of of the fibre orientation distribution needs to be performed in [MRtrix3](https://www.mrtrix.org/):
+```bash
+dwi2response tournier DWI_recon.nii.gz response.txt -lmax 6 -grad grad.b -mask mask.nii.gz
+dwi2fod csd DWI_recon.nii.gz response.txt csd.mif -lmax 6 -grad grad.b -mask mask.nii.gz
+mrview T2.nii.gz -odf.load_sh  csd.mif
+```
 
 
 About IRTK
