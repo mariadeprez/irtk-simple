@@ -2,8 +2,8 @@
 # SLICE TO VOLUME RECONSTRUCTION (SVR)
 
 **irtk-simple** is a  software package has been created to distribute software for motion correction 
-and super-resolution reconstruction of structural and diffusion MRI. The reconstruction algorithms
-were developed and implemented by Dr Maria Deprez (Kuklisova Murgasova) withing IRTK sofware package.
+and super-resolution reconstruction of **structural and diffusion MRI of the fetal brain**. The reconstruction algorithms
+were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people/maria-deprez) (Kuklisova Murgasova) within IRTK sofware package.
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
