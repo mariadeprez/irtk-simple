@@ -76,8 +76,8 @@ The example command:
 ```bash
 reconstruction reconstructed_volume.nii.gz 3 axial_stack.nii.gz coronal_stack.nii.gz sagital_stack.nii.gz -mask axial_mask.nii.gz -packages 2 2 2 -thickness 2.5 2.5 2.5
 ```
-It is essential to imput the brain (or head) mask. Packages refer to number of loops in acquisition order of the slices. 
-.g. if the slices are acquired as first even then odd, we have 2 packages. It is essential to input correct slice thickness 
+It is essential to imput the brain (or head) mask. Packages refer to number of loops in acquisition order of the slices, 
+e.g. if the slices are acquired as first odd then even, we have 2 packages. It is essential to input correct slice thickness 
 for the super-resolution algorithm to work correctly.
 
 
@@ -92,12 +92,13 @@ The example command:
 estimate-distortion corrected_EPI_stacks.nii.gz T2aligned.nii.gz EPI_stacks.nii.gz -thickness 3.5 -mask mask.nii.gz  -phase y  -packages 2 -save_fieldmap fieldmap.nii.gz  
 ```
 EPI stacks are in one nifti file which can be 3D or 4D if there are multiple stacks. The assumption is that the geometric distortion is stationary for these stacks. 
-It is important to ensure that phase-encoding direction (in which the distortion occurs) enterred correctly (can be x or y, z is always slice direction), otherwise
-algorithm will not work correctly. The command will save corrected EPI stacks, and as an opion also estimated distortion field (fieldmap).
+It is important to ensure that phase-encoding direction (in which the distortion occurs) entered correctly (can be x or y, z is always slice direction), otherwise
+the algorithm will not work correctly. The command will save corrected EPI stacks, and as an opion also estimated distortion field (fieldmap).
 
-The distortion should be estimated from the B0 diffusion stacks (non-diffusion waited, e.g. b=0) or fMRI stacks. For diffusion weighted stacks (b>0) 
+The distortion should be estimated from the B0 diffusion stacks (non-diffusion waited, e.g. b=0) or fMRI stacks. For diffusion weighted (DWI) stacks (b>0) 
 the fieldmap estimated from the B0 stacks can be applied to correct them too. Example command:
 ```bash
+fieldmapcorrect DWI_stacks.nii.gz corrected_DWI_stacks.nii.gz fieldmap.nii.gz
 
 ```
 

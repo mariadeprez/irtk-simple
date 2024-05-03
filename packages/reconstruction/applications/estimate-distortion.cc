@@ -861,7 +861,7 @@ int main(int argc, char **argv)
     double x,y,z,xx,yy,zz;
     irtkImageAttributes attr = original.GetImageAttributes();
     
-    if ( (debug) || ((iter==iterations-1) && (!smooth)) )
+    if (true) //cannot skip, the fieldmap is needed to correct the stacks
     {
       if (debug)
       {
