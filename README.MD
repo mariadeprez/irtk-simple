@@ -6,13 +6,19 @@ and super-resolution reconstruction of structural and diffusion MRI. The reconst
 were developed and implemented by Dr Maria Deprez (Kuklisova Murgasova) withing IRTK sofware package.
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
+- [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
 
 
-fetal MRI, described in 
+References
+----------
+
+The irtk-simple package contains three main algorithms:
+
+1. Motion correction and super-resolution reconstruction of fetal structural MRI
 
 Reconstruction of fetal brain MRI with intensity matching and complete outlier removal. 
 M Kuklisova-Murgasova, G Quaghebeur, MA Rutherford, JV Hajnal, JA Schanbel. 
-Medical Image Analysis 16(8), 2012.
+Medical Image Analysis 16(8), 2012. doi: 10.1016/j.media.2012.07.004
 
 It is called SIMPLE IRTK - because it is based on a lightweight and easy to compile 
 subset of package Image Registration Toolkit (IRTK).
