@@ -10,7 +10,7 @@ were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
-- [about irtk-simple] (https://github.com/mariadeprez/irtk-simple#about):
+- [about irtk-simple] (https://github.com/mariadeprez/irtk-simple#about-irtk-simple):
 
 
 References
@@ -27,10 +27,10 @@ Medical Image Analysis 16(8), 2012. doi: [10.1016/j.media.2012.07.004](https://d
 About irtk-simple
 -----
 It is called SIMPLE IRTK - because it is based on a lightweight and easy to compile 
-subset of package Image Registration Toolkit (IRTK).
+subset of Image Registration Toolkit (IRTK).
 
 The package is parallelized using Threading Building Blocks (TBB), which is included
-to ensure compatibility of the version. 
+to ensure compatibility. 
 
 Installation
 ------------
