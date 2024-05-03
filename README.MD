@@ -117,7 +117,7 @@ the fieldmap estimated from the B0 stacks can be applied to correct them too. Ex
 fieldmapcorrect DWI_stacks.nii.gz corrected_DWI_stacks.nii.gz fieldmap.nii.gz -y
 ```
 To ensure that fieldmap is correctly applied, input the coordinate on which the correction should be performed, 
-e.g. `-x` or `-y`. If the direction in which the fieldmap needs to be applied descending, use option `-minus`.
+e.g. `-x` or `-y`. If the direction in which the fieldmap needs to be applied is descending, use option `-minus`.
 
 
 
