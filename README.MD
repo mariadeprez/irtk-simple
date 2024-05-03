@@ -5,7 +5,7 @@
 and super-resolution reconstruction of structural and diffusion MRI. The reconstruction algorithms
 were developed and implemented by Dr Maria Deprez (Kuklisova Murgasova) withing IRTK sofware package.
 
-- [Installation] (https://github.com/mariadeprez/irtk-simple#Installation)
+- [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 
 
 fetal MRI, described in 
