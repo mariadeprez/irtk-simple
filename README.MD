@@ -18,7 +18,7 @@ The irtk-simple package contains three main algorithms:
 
 Reconstruction of fetal brain MRI with intensity matching and complete outlier removal. 
 M Kuklisova-Murgasova, G Quaghebeur, MA Rutherford, JV Hajnal, JA Schanbel. 
-Medical Image Analysis 16(8), 2012. doi: 10.1016/j.media.2012.07.004
+Medical Image Analysis 16(8), 2012. doi: [10.1016/j.media.2012.07.004](https://doi.org/10.1016/j.media.2012.07.004)
 
 It is called SIMPLE IRTK - because it is based on a lightweight and easy to compile 
 subset of package Image Registration Toolkit (IRTK).
