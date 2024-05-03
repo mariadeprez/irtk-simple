@@ -10,7 +10,7 @@ were developed and implemented by [Dr Maria Deprez](https://www.kcl.ac.uk/people
 
 - [installation](https://github.com/mariadeprez/irtk-simple#Installation): Install and compile on UBUNTU
 - [references](https://github.com/mariadeprez/irtk-simple#References): Read detailed description of reconstruction algorithms
-- [about irtk-simple](https://github.com/mariadeprez/irtk-simple#about-irtk-simple):
+- [about irtk-simple](https://github.com/mariadeprez/irtk-simple#about-irtk-simple): why the package was created
 
 
 References
