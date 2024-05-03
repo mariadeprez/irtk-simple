@@ -1528,7 +1528,7 @@ int main(int argc, char **argv)
   ///////////////////
   //end of SH part
  
-  reconstruction.SimulateSignal(output_name=NULL);//dirs_xyz,order);
+  reconstruction.SimulateSignal(output_name);//dirs_xyz,order);
  
   if (debug || save_transformations)
       reconstruction.SaveTransformations();
@@ -1580,11 +1580,14 @@ int main(int argc, char **argv)
   //TEST 17/04/19 switching of correction after volume
   //reconstruction.AddBiasAndScale(old_bias, old_scale);
     
-  reconstruction.SimulateStacksDTIIntensityMatching(stacks,true);
-  for (unsigned int i=0;i<stacks.size();i++)
+  if (debug)
   {
-    sprintf(buffer,"simulated%i.nii.gz",i);
-    stacks[i].Write(buffer);
+    reconstruction.SimulateStacksDTIIntensityMatching(stacks,true);
+    for (unsigned int i=0;i<stacks.size();i++)
+    {
+      sprintf(buffer,"simulated%i.nii.gz",i);
+      stacks[i].Write(buffer);
+    }
   }
 
   /*

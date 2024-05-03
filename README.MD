@@ -24,12 +24,22 @@ References
 
 The irtk-simple package contains three main algorithms:
 
-1. Motion correction and super-resolution reconstruction of fetal structural MRI
-
+### Motion correction and super-resolution reconstruction of fetal structural MRI
 Reconstruction of fetal brain MRI with intensity matching and complete outlier removal. 
 M Kuklisova-Murgasova, G Quaghebeur, MA Rutherford, JV Hajnal, JA Schanbel. 
 Medical Image Analysis 16(8), 2012. doi: [10.1016/j.media.2012.07.004](https://doi.org/10.1016/j.media.2012.07.004)
 
+### Distortion correction of  fetal EPI
+Distortion Correction in Fetal EPI Using Non-Rigid Registration With a Laplacian Constraint.
+M Kuklisova-Murgasova, G Lockwood Estrin, RG Nunes, SJ Malik, MA Rutherford, D Rueckert, JV Hajnal
+IEEE Transactions on Medical Imaging 37(1), 2018.
+doi: [10.1109/TMI.2017.2667227](https://doi.org/10.1109/tmi.2017.2667227)
+
+### Spherical Harmonics reconstruction of fetal diffusion MRI
+Higher Order Spherical Harmonics Reconstruction of Fetal Diffusion MRI With Intensity Correction.
+M Deprez, A Price, D Christiaens, G Lockwood Estrin, L Cordero-Grande, J Hutter, A Daducci, JD Tournier, M Rutherford, SJ Counsell, M Bach Cuadra, JV Hajnal
+IEEE Transactions on Medical Imaging 39(4), 2020.
+doi: [10.1109/TMI.2019.2943565](https://doi.org/10.1109/tmi.2019.2943565)
 About irtk-simple
 -----
 It is called SIMPLE IRTK - because it is based on a lightweight and easy to compile 
