@@ -14,6 +14,9 @@ subset of package Image Registration Toolkit (IRTK).
 The package is parallelized using Threading Building Blocks (TBB), which is included
 to ensure compatibility of the version. 
 
+Installation
+------------
+
 ## INSTRUCTIONS for UBUNTU:
 
 * Install libraries:
