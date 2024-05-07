@@ -1,7 +1,7 @@
 
 # SLICE TO VOLUME RECONSTRUCTION (SVR)
 
-During MRI acquisition fetus moves. Fast acquisition of 2D slices freezes motion in time. Between-slice motion is the corrected with slice-to-volume registration and the 3D volume is reconstructed using super-resolution reconstruction.
+During MRI acquisition fetus moves. Fast acquisition of 2D slices freezes motion in time. Between-slice motion is the corrected with slice-to-volume registration and the 3D volume is reconstructed using super-resolution reconstruction. Watch this [youtube video](https://www.youtube.com/watch?v=vkis7F0lUzw) to learn more about fetal diffusion MRI.
 
 ![moving fetus](https://github.com/mariadeprez/irtk-simple/blob/main/fetus.gif)
 <img src="fetal_dMRI.png" alt="fetal MRI recon" width="400" align="centre"/>
